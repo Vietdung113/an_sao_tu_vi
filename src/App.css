@@ -28,6 +28,104 @@
   color: #61dafb;
 }
 
+.container {
+  display: grid;
+  grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px;
+  grid-template-rows: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px;
+  grid-template-areas:
+    "ti ngo mui than"
+    "thin center center dau"
+    "mao center center tuat"
+    "dan suu ty hoi";
+  padding: 10px;
+}
+
+.ti {
+  grid-area: ti;
+  display: flex;
+  flex-direction: column;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.ngo {
+  grid-area: ngo;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.mui {
+  grid-area: mui;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.than {
+  grid-area: than;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.thin {
+  grid-area: thin;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.dau {
+  grid-area: dau;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.mao {
+  grid-area: mao;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.tuat {
+  grid-area: tuat;
+  background-color: #FAFAD2;
+  border: #282c34;
+  border-style: ridge;
+}
+.dan {
+  grid-area: dan;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.suu {
+  grid-area: suu;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.ty {
+  grid-area: ty;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.hoi {
+  grid-area: hoi;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+.center {
+  grid-area: center;
+  background-color: #FAFAD2	;
+  border: #282c34;
+  border-style: ridge;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
