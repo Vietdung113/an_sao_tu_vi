@@ -16,7 +16,6 @@ export function Cung({ data, name }) {
   let mau_ngu_hanh = lay_mau_ngu_hanh(
     MAPPING["ngu_hanh_nap_am"][thien_can][dia_chi]["ngu_hanh"]
   );
-  console.log(mau_ngu_hanh);
   return (
     <div className={name}>
       {/* ngu hanh nap am  */}
@@ -26,8 +25,7 @@ export function Cung({ data, name }) {
           fontSize: "100%",
           justifyContent: "left",
           display: "flex",
-          marginBottom: "10px",
-          paddingTop: "10px"
+          padding: "10px"
         }}
       >
         {" "}
@@ -44,24 +42,29 @@ export function Cung({ data, name }) {
           color: "black",
           textAlign: "center",
           fontSize: "120%",
-          marginBottom: "15px",
         }}
       >
         {MAPPING["cung_chuc"][cung_chuc]}
       </span>
 
-      {chinh_tinh.map((tinh, i) => (
-        <span
-          key={i}
-          style={{
-            fontSize: "150%",
-            textAlign: "center",
-            color: lay_mau_ngu_hanh(MAPPING["chinh_tinh"][tinh]),
-          }}
-        >
-          {tinh}
-        </span>
-      ))}
+      <div style={{ position: "relative", height: "60px", margin: 0, padding: 0 }}>
+        {chinh_tinh.map((tinh, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              top: i * 30,
+              left: "50%",
+              transform: "translateX(-50%)",
+              fontSize: "150%",
+              color: lay_mau_ngu_hanh(MAPPING["chinh_tinh"][tinh]),
+              whiteSpace: "nowrap"
+            }}
+          >
+            {tinh}
+          </div>
+        ))}
+      </div>
       {/* an tuan triet */}
       <div
         style={{

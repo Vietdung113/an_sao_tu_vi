@@ -1,125 +1,123 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.controls {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.download-button {
+  padding: 8px 16px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.download-button:hover {
+  background-color: #357abd;
 }
 
 .container {
   display: grid;
-  grid-template-columns: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px;
-  grid-template-rows: 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px 300px;
+  grid-template-columns: repeat(4, 410px);
+  grid-template-rows: repeat(4, 175px);
   grid-template-areas:
     "ti ngo mui than"
     "thin center center dau"
     "mao center center tuat"
     "dan suu ty hoi";
-  padding: 10px;
+  background-color: #282c34;
+  border: 1px solid #282c34;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: fit-content;
+  gap: 1px;
+}
+
+.ti,
+.ngo,
+.mui,
+.than,
+.thin,
+.dau,
+.mao,
+.tuat,
+.dan,
+.suu,
+.ty,
+.hoi,
+.center {
+  background-color: #FAFAD2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #282c34;
+  border-right: 1px solid #282c34;
 }
 
 .ti {
   grid-area: ti;
-  display: flex;
-  flex-direction: column;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
-  position: relative;
 }
+
 .ngo {
   grid-area: ngo;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
 }
+
 .mui {
   grid-area: mui;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
 }
+
 .than {
   grid-area: than;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
 }
+
 .thin {
   grid-area: thin;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
 }
-.dau {
-  grid-area: dau;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
-}
-.mao {
-  grid-area: mao;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
-}
-.tuat {
-  grid-area: tuat;
-  background-color: #FAFAD2;
-  border: #282c34;
-  border-style: ridge;
-}
-.dan {
-  grid-area: dan;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
-}
-.suu {
-  grid-area: suu;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
-}
-.ty {
-  grid-area: ty;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
-}
-.hoi {
-  grid-area: hoi;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
-}
+
 .center {
   grid-area: center;
-  background-color: #FAFAD2	;
-  border: #282c34;
-  border-style: ridge;
+  background-color: #fff8d5;
+}
+
+.dau {
+  grid-area: dau;
+}
+
+.mao {
+  grid-area: mao;
+}
+
+.tuat {
+  grid-area: tuat;
+}
+
+.dan {
+  grid-area: dan;
+}
+
+.suu {
+  grid-area: suu;
+}
+
+.ty {
+  grid-area: ty;
+}
+
+.hoi {
+  grid-area: hoi;
 }
 
 .row {
@@ -127,10 +125,12 @@
   align-items: center;
   justify-content: space-between;
 }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
