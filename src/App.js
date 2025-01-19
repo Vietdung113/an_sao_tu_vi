@@ -1,7 +1,7 @@
 import "./App.css";
 import { Cung } from "./components/Cung.tsx";
-import TimeSelector from "./components/TimeSelector";
-import { ansao } from "./services/ansao.js";
+import TimeSelector from "./components/TimeSelector.tsx";
+import { ansao } from "./services/ansao.ts";
 import { useState, useRef } from "react";
 import html2canvas from 'html2canvas';
 
