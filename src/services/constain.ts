@@ -180,4 +180,49 @@ export const TIET_KHI = [
     "Lập Xuân", "Vũ Thủy", "Kinh Trập"]
 
 
+export const VONG_THAI_TUE = [
+    "Thái Tuế",
+    "Thiếu Dương",
+    "Tang Môn",
+    "Thiếu Âm",
+    "Quan Phù",
+    "Tử Phù",
+    "Tuế Phá", 
+    "Long Đức",
+    "Bạch Hổ",
+    "Phúc Đức",
+    "Điếu Khách", 
+    "Trực Phù"
+]
+
+export const VONG_LOC_TON = [
+    "Lộc Tồn",
+    "Lực Sỹ",
+    "Thanh Long",
+    "Tiểu Hao",
+    "Tướng Quân",
+    "Tấu Thư", 
+    "Phi Liêm",
+    "Hỷ Thần",
+    "Bệnh Phù",
+    "Đại Hao",
+    "Phục Binh",
+    "Quan Phù"
+]
+
+export const VONG_TRANG_SINH = [
+    "Trường Sinh",
+    "Mộc Dục",
+    "Quan Đới",
+    "Lâm Quan",
+    "Đế Vượng",
+    "Suy",
+    "Bệnh",
+    "Tử",
+    "Mộ", 
+    "Tuyệt",
+    "Thai",
+    "Dưỡng"
+]
+
 export { THIEN_CAN, DIA_CHI, NGU_HANH, NAP_AM, CUNG_CHUC };

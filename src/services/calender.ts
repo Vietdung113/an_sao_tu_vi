@@ -165,7 +165,7 @@ function convertLunar2Solar(lunarDay, lunarMonth, lunarYear, lunarLeap, timeZone
     return jdToDate(monthStart + lunarDay - 1);
 }
 
-export function getLunarDateTK(lunar: LunarDate, timeZone = 7) {
+export function getLunarDateTK(lunar: LunarDate, timeZone = 7): LunarDate {
     var sunDegree = getSunLongitude(lunar.jd, timeZone);
     var tiet_khi = getTietKhiFromDegree(sunDegree);
     var thangTK = monthByTK(tiet_khi);
@@ -174,8 +174,14 @@ export function getLunarDateTK(lunar: LunarDate, timeZone = 7) {
     } else if (thangTK === 12 && tiet_khi === TietKhi.LapXuan) {
         lunar.year += 1;
     }
-    lunar.month = thangTK;
-    return lunar;
+   
+    return {
+        day: lunar.day,
+        month: thangTK,
+        year: lunar.year,
+        leapYear: lunar.leapYear,
+        jd: lunar.jd
+    }
 }
 
 

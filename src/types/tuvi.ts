@@ -23,6 +23,13 @@ export class LunarDate implements ILunarDate {
         this.jd = jd;
     }
 }
+// Am Duong Nam Nu
+export enum AmDuongNamNu {
+    DuongNam = 0,
+    AmNam = 1,
+    DuongNu = 2,
+    AmNu = 3
+}
 
 // Ngũ Hành type
 export enum NguHanh {
@@ -155,7 +162,7 @@ export enum ViTriCung {
     HuynhDe = 11
 }
 
-export enum ChinhTinh {
+export enum ChinhTinhEnum {
     Tuvi = 0,
     ThienCo = 1,
     ThaiDuong = 2,
@@ -170,4 +177,53 @@ export enum ChinhTinh {
     ThienLuong = 11,
     ThatSat = 12,
     PhaQuan = 13,
+}
+
+export interface ChinhTinh {
+    name: number,
+    nguHanh: number;
+}
+
+export interface VongThaiTue {
+    name: number;
+    nguHanh: number;
+}
+
+export interface VongLocTon {
+    name: number;
+    nguHanh: number;
+}
+
+export enum SatTinhEnum {
+    HoaTinh = 0,
+    LinhTinh = 1,
+    DiaKhong = 2,
+    DiaKiep = 3,
+    KinhDuong = 4,
+    DaLa = 5,
+    ThienKhoc = 6,
+    ThienHu = 7,
+}
+export interface SatTinh {
+    name: number,
+    nguHanh: number;
+}
+
+
+export enum CatTinhEnum {
+    VanXuong = 0,
+    VanKhuc = 1,
+    TaPhu = 2,
+    HuuBat = 3,
+    ThienKhoi = 4,
+    ThienViet = 5,
+    LongTri = 6,
+    PhuongCac = 7,
+    TamThai = 8,
+    BatToa = 9,
+}
+
+export interface CatTinh {
+    name: number,
+    nguHanh: number;
 }
