@@ -10,6 +10,16 @@ export function getAmDuongNamNu(isMale: boolean, canNam: number): number {
     if (!isMale && canNam % 2 === 1) return AmDuongNamNu.AmNu;
     throw new Error("Invalid input parameters");
 }
+
+export function anCanCung(year: number) {
+    let canCung: number[] = new Array(12);
+    for (let i = 0; i < 12; i++) {
+        var thang = (i + 11) % 12;
+        if (thang === 0) thang = 12;
+        canCung[i] = (year * 12 + thang + 3) % 10;
+    }
+    return canCung;
+}
 export function getChiGio(hour: number): number {
     /**
      * Converts a given hour (in 24-hour format) to the corresponding Can Chi hour.
@@ -100,9 +110,6 @@ export function anCungThan(month: number, hour: number) {
 }
 
 export function timCucMenh(viTriMenh: number, canNam: number): Cuc {
-    console.log('-----------------Cuc Menh-----------------');
-    console.log("vi tri menh: ", viTriMenh);
-    console.log("can nam: ", canNam);
     const CUC_MAP = {
         [`${DiaChi.Ty},${DiaChi.Suu}`]: {
             [`${ThienCan.Giap},${ThienCan.Ky}`]: { ten: "Thuỷ Nhị cục", so: 2, nguHanh: NguHanh.Thuy },
@@ -240,28 +247,24 @@ function getViTriLocTon(canNam: number) {
 export function anVongLocTon(canNam: number) {
     var viTriLocTon = getViTriLocTon(canNam);
     let viTriVongLocTon: VongLocTon[] = new Array(12);
-    viTriVongLocTon[(viTriLocTon + 0) % 12] = { name: 0, nguHanh: NguHanh.Hoa };
-    viTriVongLocTon[(viTriLocTon + 1) % 12] = { name: 1, nguHanh: NguHanh.Tho };
-    viTriVongLocTon[(viTriLocTon + 2) % 12] = { name: 2, nguHanh: NguHanh.Thuy };
-    viTriVongLocTon[(viTriLocTon + 3) % 12] = { name: 3, nguHanh: NguHanh.Moc };
-    viTriVongLocTon[(viTriLocTon + 4) % 12] = { name: 4, nguHanh: NguHanh.Kim };
-    viTriVongLocTon[(viTriLocTon + 5) % 12] = { name: 5, nguHanh: NguHanh.Tho };
-    viTriVongLocTon[(viTriLocTon + 6) % 12] = { name: 6, nguHanh: NguHanh.Thuy };
-    viTriVongLocTon[(viTriLocTon + 7) % 12] = { name: 7, nguHanh: NguHanh.Moc };
-    viTriVongLocTon[(viTriLocTon + 8) % 12] = { name: 8, nguHanh: NguHanh.Kim };
-    viTriVongLocTon[(viTriLocTon + 9) % 12] = { name: 9, nguHanh: NguHanh.Tho };
-    viTriVongLocTon[(viTriLocTon + 10) % 12] = { name: 10, nguHanh: NguHanh.Thuy };
-    viTriVongLocTon[(viTriLocTon + 11) % 12] = { name: 11, nguHanh: NguHanh.Moc };
+    viTriVongLocTon[(viTriLocTon + 0) % 12] = { name: 0, nguHanh: NguHanh.Tho };
+    viTriVongLocTon[(viTriLocTon + 1) % 12] = { name: 1, nguHanh: NguHanh.Kim };
+    viTriVongLocTon[(viTriLocTon + 2) % 12] = { name: 2, nguHanh: NguHanh.Moc };
+    viTriVongLocTon[(viTriLocTon + 3) % 12] = { name: 3, nguHanh: NguHanh.Hoa };
+    viTriVongLocTon[(viTriLocTon + 4) % 12] = { name: 4, nguHanh: NguHanh.Moc };
+    viTriVongLocTon[(viTriLocTon + 5) % 12] = { name: 5, nguHanh: NguHanh.Hoa };
+    viTriVongLocTon[(viTriLocTon + 6) % 12] = { name: 6, nguHanh: NguHanh.Hoa };
+    viTriVongLocTon[(viTriLocTon + 7) % 12] = { name: 7, nguHanh: NguHanh.Hoa };
+    viTriVongLocTon[(viTriLocTon + 8) % 12] = { name: 8, nguHanh: NguHanh.Thuy };
+    viTriVongLocTon[(viTriLocTon + 9) % 12] = { name: 9, nguHanh: NguHanh.Hoa };
+    viTriVongLocTon[(viTriLocTon + 10) % 12] = { name: 10, nguHanh: NguHanh.Hoa };
+    viTriVongLocTon[(viTriLocTon + 11) % 12] = { name: 11, nguHanh: NguHanh.Hoa };
 
-    // for (let i = 0; i < 12; i++) {
-    //     console.log(DIA_CHI[i] + " " + VONG_LOC_TON[viTriVongLocTon[i].name]);
-    // }
     return viTriVongLocTon;
 }
 
 export function anVongTrangSinh(cuc: Cuc, am_duong_nam_nu: number) {
     var viTriTrangSinh;
-    console.log(cuc.nguHanh)
     if (cuc.nguHanh === NguHanh.Thuy) viTriTrangSinh = DiaChi.Than;
     if (cuc.nguHanh === NguHanh.Moc) viTriTrangSinh = DiaChi.Hoi;
     if (cuc.nguHanh === NguHanh.Kim) viTriTrangSinh = DiaChi.Ti;
@@ -271,7 +274,6 @@ export function anVongTrangSinh(cuc: Cuc, am_duong_nam_nu: number) {
     var viTriVongTruongSinh;
     if (am_duong_nam_nu === AmDuongNamNu.DuongNam || am_duong_nam_nu === AmDuongNamNu.AmNu) {
         viTriVongTruongSinh = Array.from({ length: 12 }, (_, i) => (viTriTrangSinh + i) % 12);
-        console.log(viTriVongTruongSinh)
     } else {
         viTriVongTruongSinh = Array.from({ length: 12 }, (_, i) => (viTriTrangSinh - i + 12) % 12);
     }
@@ -325,32 +327,32 @@ export function anCatTinh(tuTru: TuTru, lunarDate: LunarDate) {
     var viTriTaPhu = (4 + lunarDate.month - 1) % 12;
     var viTriHuuBat = (10 - lunarDate.month + 1 + 12) % 12;
     viTriCatTinh[viTriTaPhu].push({ name: CatTinhEnum.TaPhu, nguHanh: NguHanh.Tho });
-    viTriCatTinh[viTriHuuBat].push({name: CatTinhEnum.HuuBat, nguHanh: NguHanh.Thuy});
+    viTriCatTinh[viTriHuuBat].push({ name: CatTinhEnum.HuuBat, nguHanh: NguHanh.Thuy });
 
     // an xuong khuc
     viTriCatTinh[(10 - tuTru.chiGio) % 12].push({ name: CatTinhEnum.VanXuong, nguHanh: NguHanh.Kim });
-    viTriCatTinh[(4 + tuTru.chiGio) % 12].push( {name: CatTinhEnum.VanKhuc, nguHanh: NguHanh.Thuy});
+    viTriCatTinh[(4 + tuTru.chiGio) % 12].push({ name: CatTinhEnum.VanKhuc, nguHanh: NguHanh.Thuy });
 
     // an Khoi Viet
-    if (tuTru.canNam in [ThienCan.Giap, ThienCan.Mau]) {
-        viTriCatTinh[DiaChi.Suu].push({ name: CatTinhEnum.ThienKhoi, nguHanh: NguHanh.Hoa});
-        viTriCatTinh[DiaChi.Mui].push({ name: CatTinhEnum.ThienViet, nguHanh: NguHanh.Hoa});
+    if ([ThienCan.Giap, ThienCan.Mau].includes(tuTru.canNam)) {
+        viTriCatTinh[DiaChi.Suu].push({ name: CatTinhEnum.ThienKhoi, nguHanh: NguHanh.Hoa });
+        viTriCatTinh[DiaChi.Mui].push({ name: CatTinhEnum.ThienViet, nguHanh: NguHanh.Hoa });
     }
-    if (tuTru.canNam in [ThienCan.At, ThienCan.Ky]) {
-        viTriCatTinh[DiaChi.Suu].push({ name: CatTinhEnum.ThienKhoi, nguHanh: NguHanh.Hoa});
-        viTriCatTinh[DiaChi.Than].push({ name: CatTinhEnum.ThienViet, nguHanh: NguHanh.Hoa});
+    if ([ThienCan.At, ThienCan.Ky].includes(tuTru.canNam)) {
+        viTriCatTinh[DiaChi.Suu].push({ name: CatTinhEnum.ThienKhoi, nguHanh: NguHanh.Hoa });
+        viTriCatTinh[DiaChi.Than].push({ name: CatTinhEnum.ThienViet, nguHanh: NguHanh.Hoa });
     }
-    if (tuTru.canNam in [ThienCan.Canh, ThienCan.Tan]) {
-        viTriCatTinh[DiaChi.Ngo].push({ name: CatTinhEnum.ThienKhoi, nguHanh: NguHanh.Hoa});
-        viTriCatTinh[DiaChi.Dan].push({ name: CatTinhEnum.ThienViet, nguHanh: NguHanh.Hoa});
+    if ([ThienCan.Canh, ThienCan.Tan].includes(tuTru.canNam)) {
+        viTriCatTinh[DiaChi.Ngo].push({ name: CatTinhEnum.ThienKhoi, nguHanh: NguHanh.Hoa });
+        viTriCatTinh[DiaChi.Dan].push({ name: CatTinhEnum.ThienViet, nguHanh: NguHanh.Hoa });
     }
-    if (tuTru.canNam in [ThienCan.Binh, ThienCan.Dinh]) {
-        viTriCatTinh[DiaChi.Hoi].push({ name: CatTinhEnum.ThienKhoi, nguHanh: NguHanh.Hoa});
-        viTriCatTinh[DiaChi.Dau].push({ name: CatTinhEnum.ThienViet, nguHanh: NguHanh.Hoa});
+    if ([ThienCan.Binh, ThienCan.Dinh].includes(tuTru.canNam)) {
+        viTriCatTinh[DiaChi.Hoi].push({ name: CatTinhEnum.ThienKhoi, nguHanh: NguHanh.Hoa });
+        viTriCatTinh[DiaChi.Dau].push({ name: CatTinhEnum.ThienViet, nguHanh: NguHanh.Hoa });
     }
-    if (tuTru.canNam in [ThienCan.Nham, ThienCan.Quy]) {
-        viTriCatTinh[DiaChi.Mao].push({ name: CatTinhEnum.ThienKhoi, nguHanh: NguHanh.Hoa});
-        viTriCatTinh[DiaChi.Ti].push({ name: CatTinhEnum.ThienViet, nguHanh: NguHanh.Hoa});
+    if ([ThienCan.Nham, ThienCan.Quy].includes(tuTru.canNam)) {
+        viTriCatTinh[DiaChi.Mao].push({ name: CatTinhEnum.ThienKhoi, nguHanh: NguHanh.Hoa });
+        viTriCatTinh[DiaChi.Ti].push({ name: CatTinhEnum.ThienViet, nguHanh: NguHanh.Hoa });
     }
 
     // // an Long Phuong
@@ -358,8 +360,7 @@ export function anCatTinh(tuTru: TuTru, lunarDate: LunarDate) {
     // viTriCatTinh[(10 - tuTru.chiNam + 12) % 12].push(CatTinhEnum.PhuongCac);
 
     // // an tam thai, bat toa
-    // console.log("TA PHU: ", DIA_CHI[viTriTaPhu]);
-    // console.log("HU BAT: ", DIA_CHI[viTriHuuBat]);
+
     return viTriCatTinh;
 }
 
