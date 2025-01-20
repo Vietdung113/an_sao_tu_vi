@@ -1,9 +1,10 @@
 import { convertSolar2Lunar, getLunarDateTK } from "./calender.ts";
-import { DIA_CHI, THIEN_CAN, CUNG_CHUC, STARS, VONG_TRANG_SINH } from "./constain.ts";
-import { anChinhtinh, anCungChuc, anCungMenh, anCungThan, anCatTinh, anSatTinh, anVongLocTon, anVongThaiTue, anVongTrangSinh, getAmDuongNamNu, getChiGio, getTuTru, timCucMenh, anCanCung } from "./utils.ts";
+import { DIA_CHI, THIEN_CAN } from "./constain.ts";
+// import { DIA_CHI, THIEN_CAN, CUNG_CHUC, STARS, VONG_TRANG_SINH } from "./constain.ts";
+import { anChinhtinh, anCungChuc, anCungMenh, anCungThan, anCatTinh, anSatTinh, anVongLocTon, anVongThaiTue, anVongTrangSinh, getAmDuongNamNu, getChiGio, getTuTru, timCucMenh, anCanCung, tinhDaiVan, tinhCanTieuVan } from "./utils.ts";
 
 // Function to process time data and return formatted data for Cung component
-export function ansao(hour, day, month, year, timeZone, isMale) {
+export function ansao(hour, day, month, year, timeZone, isMale, namXemHan = new Date().getFullYear()) {
 
   var chiGio = getChiGio(hour);
   const lunarDate = convertSolar2Lunar(day, month, year, timeZone);
@@ -35,6 +36,11 @@ export function ansao(hour, day, month, year, timeZone, isMale) {
   // an cat tinh
   const lucCat = anCatTinh(tuTru, lunarDate);
 
+  // an Dai Van
+  const daiVan = tinhDaiVan(lunarDate, namXemHan)
+
+  var canTieuVan = tinhCanTieuVan(namXemHan)
+
   // This is a sample implementation - replace with actual logic
   return {
     "canCung": canCung,
@@ -48,5 +54,7 @@ export function ansao(hour, day, month, year, timeZone, isMale) {
     "lucCat": lucCat,
     "tuTru": tuTru,
     "lunarDate": lunarDate,
+    "daivan": daiVan,
+    "canTieuVan": canTieuVan
   };
 }

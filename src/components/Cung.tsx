@@ -1,8 +1,7 @@
 import React from "react";
-import { MAU_NGU_HANH } from "../types/mapping";
-import { STARS, CUNG_CHUC, DIA_CHI, NAP_AM, THIEN_CAN, VONG_TRANG_SINH, BANG_TU_HOA } from "../services/constain.ts";
+import { STARS, CUNG_CHUC, DIA_CHI, NAP_AM, THIEN_CAN, VONG_TRANG_SINH, BANG_TU_HOA, NGU_HANH_DISPLAY } from "../services/constain.ts";
 import { NguHanh, StarEnum, TuTru } from "../types/tuvi.ts";
-
+import { MAU_NGU_HANH } from "../types/mapping.js";
 type Star = {
   name: string;
   nguHanh: number;
@@ -16,12 +15,15 @@ const styles = {
     padding: "8px",
     position: "relative" as const
   },
-  napAm: {
-    fontSize: "80%",
+  napAmContainer: {
     display: "flex",
-    alignItems: "center",
-    padding: "4px",
-    marginBottom: "8px"
+    flexDirection: "column" as const,
+    gap: "4px",
+    marginBottom: "8px",
+    alignItems: "flex-start"
+  },
+  napAm: {
+    fontSize: "80%"
   },
   cungChuc: {
     position: "absolute" as const,
@@ -73,8 +75,13 @@ const styles = {
   }
 };
 
-function getNguHanhColor(ngu_hanh: number) {
-  return MAU_NGU_HANH[ngu_hanh];
+function getNguHanhStyle(ngu_hanh: number): React.CSSProperties {
+  return {
+    backgroundColor: NGU_HANH_DISPLAY[ngu_hanh].color,
+    color: 'black',
+    padding: '0 4px',
+    borderRadius: '4px'
+  };
 }
 
 function getTuHoaStars(tuTru: TuTru, chinhTinh: Star[], lucCat: Star[]): { leftStars: Star[], rightStars: Star[] } {
@@ -134,6 +141,10 @@ function getAdditionalStars(vongThaiTue: Star, vongLocTon: Star, lucSat: Star[],
   return { leftStars, rightStars };
 }
 
+function getNguHanhColor(ngu_hanh: number): string {
+  return MAU_NGU_HANH[ngu_hanh];
+}
+
 type CSSProperties = React.CSSProperties;
 
 function StarList({ stars, style }: { stars: Star[], style: CSSProperties }) {
@@ -165,10 +176,17 @@ function extractCungData(data: any, name: string) {
   const lucSat = data["lucSat"][name];
   const lucCat = data["lucCat"][name];
   const ngu_hanh_nap_am = NAP_AM[canCung[name]][name];
+  const daiVan = data["daivan"];
+  const canTieuVan = data["canTieuVan"][name];
 
   if (ngu_hanh_nap_am === null) {
     throw new Error("Ngu hanh nap am is null");
   }
+
+  const canDaiVan = (canCung[name] + 2 * daiVan) % 10;
+  const ngu_hanh_nap_am_dai_van = NAP_AM[canDaiVan][name];
+  
+  const ngu_hanh_nap_am_tieu_van = NAP_AM[canTieuVan][name];
 
   return {
     tuTru,
@@ -180,7 +198,9 @@ function extractCungData(data: any, name: string) {
     vongTrangSinh,
     lucSat,
     lucCat,
-    ngu_hanh_nap_am
+    ngu_hanh_nap_am,
+    ngu_hanh_nap_am_dai_van,
+    ngu_hanh_nap_am_tieu_van
   };
 }
 
@@ -195,7 +215,9 @@ export function Cung({ data, name }) {
     vongTrangSinh,
     lucSat,
     lucCat,
-    ngu_hanh_nap_am
+    ngu_hanh_nap_am,
+    ngu_hanh_nap_am_dai_van,
+    ngu_hanh_nap_am_tieu_van
   } = extractCungData(data, name);
 
   const tuHoaStars = getTuHoaStars(tuTru, chinhTinh, lucCat);
@@ -206,16 +228,36 @@ export function Cung({ data, name }) {
 
   return (
     <div className={name} style={styles.container}>
-      {/* Ngu hanh nap am */}
-      <div
-        style={{
-          ...styles.napAm,
-          color: getNguHanhColor(ngu_hanh_nap_am.ngu_hanh)
-        }}
-      >
-        {THIEN_CAN[canCung[name]] + " " + DIA_CHI[name]} {" - "} {ngu_hanh_nap_am.nap_am}
-      </div>
+      <div style={styles.napAmContainer}>
+        {/* Ngu hanh nap am */}
+        <div
+          style={{
+            ...styles.napAm,
+            ...getNguHanhStyle(ngu_hanh_nap_am.ngu_hanh)
+          }}
+        >
+          {THIEN_CAN[canCung[name]] + " " + DIA_CHI[name]} {" - "} {ngu_hanh_nap_am.nap_am}
+        </div>
+        {/* Dai Van */}
+        <div
+          style={{
+            ...styles.napAm,
+            ...getNguHanhStyle(ngu_hanh_nap_am_dai_van.ngu_hanh)
+          }}
+        >
+          {ngu_hanh_nap_am_dai_van.name + " - " + ngu_hanh_nap_am_dai_van.nap_am}
+        </div>
+        {/* Tieu Van */}
+        <div
+          style={{
+            ...styles.napAm,
+            ...getNguHanhStyle(ngu_hanh_nap_am_tieu_van.ngu_hanh)
+          }}
+        > 
+          {ngu_hanh_nap_am_tieu_van.name + " - " + ngu_hanh_nap_am_tieu_van.nap_am}
+          </div>
 
+      </div>
       {/* Content area */}
       <div>
         {/* Cung Chuc */}

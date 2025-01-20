@@ -8,6 +8,7 @@ const TimeSelector = ({ onChange }) => {
     month: new Date().getMonth() + 1,
     year: new Date().getFullYear(),
     gmt: 7,
+    namXem: new Date().getFullYear(),
   });
 
   // Generate options for selectors
@@ -34,6 +35,7 @@ const TimeSelector = ({ onChange }) => {
 
   return (
     <div className="time-selector">
+      <div className="birth-date-label">Chọn Ngày Sinh</div>
       <div className="time-selector-grid">
         <select name="hour" value={selectedTime.hour} onChange={handleChange}>
           {hours.map((hour) => (
@@ -71,6 +73,17 @@ const TimeSelector = ({ onChange }) => {
             </option>
           ))}
         </select>
+        <div className="nam-xem-container">
+          <label>Năm xem:</label>
+          <input
+            type="number"
+            name="namXem"
+            value={selectedTime.namXem}
+            onChange={handleChange}
+            min={1900}
+            max={2100}
+          />
+        </div>
       </div>
     </div>
   );

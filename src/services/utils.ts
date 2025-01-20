@@ -1,4 +1,4 @@
-import { CUNG_CHUC, DIA_CHI, THIEN_CAN, VONG_TRANG_SINH } from './constain.ts';
+// import { CUNG_CHUC, DIA_CHI, THIEN_CAN, VONG_TRANG_SINH } from './constain.ts';
 import { AmDuongNamNu, StarEnum, Cuc, DiaChi, LunarDate, NguHanh, ThienCan, Star} from '../types/tuvi.ts';
 import { TuTru } from '../types/tuvi.ts';
 
@@ -62,11 +62,11 @@ function getCanChiGio(jd: number, chiGio: number) {
     return [can, chiGio];
 }
 
-export function getTuTru(lunarTK: LunarDate, chiGio: number): TuTru {
+export function getTuTru(lunarTK: LunarDate, hour: number): TuTru {
     var [canNam, chiNam] = getCanChiNam(lunarTK.year);
     var [canThang, chiThang] = getCanChiThang(lunarTK.year, lunarTK.month);
     var [canNgay, chiNgay] = getCanChiNgay(lunarTK.jd);
-    var [canGio, chiGio] = getCanChiGio(lunarTK.jd, chiGio);
+    var [canGio, chiGio] = getCanChiGio(lunarTK.jd, hour);
     return {
         canGio,
         chiGio,
@@ -288,7 +288,6 @@ export function anSatTinh(canNam: number, chiNam: number, chiGio: number) {
     // an Kinh Da
     let viTriSatTinh: Star[][] = Array.from({ length: 12 }, () => []);
     const viTriLocTon = getViTriLocTon(canNam);
-    console.log("viTriLocTon", viTriLocTon);
     viTriSatTinh[(viTriLocTon + 1) % 12].push({ name: StarEnum.KinhDuong, nguHanh: NguHanh.Kim });
     viTriSatTinh[(viTriLocTon + 11) % 12].push({ name: StarEnum.DaLa, nguHanh: NguHanh.Kim });
 
@@ -363,4 +362,26 @@ export function anCatTinh(tuTru: TuTru, lunarDate: LunarDate) {
     // // an tam thai, bat toa
 
     return viTriCatTinh;
+}
+
+
+function demNamDan(start: number, end: number) {
+    var count = 0;
+    for (var i = start + 1; i <= end; i++) {
+        var [_, chi] = getCanChiNam(i);
+        if (chi == DiaChi.Dan) count++;
+    }
+    return count;
+}
+export function tinhDaiVan(lunarDate: LunarDate, namXemHan: number) {
+    return demNamDan(lunarDate.year, namXemHan);
+}
+
+export function tinhCanTieuVan(namXemHan) {
+    var canCacThang = new Array(12);
+    var months = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    for (let i=0; i < months.length; i++) {
+        canCacThang[i] = (namXemHan * 12 + months[i] + 3) % 10;
+    }
+    return canCacThang;
 }

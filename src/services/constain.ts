@@ -324,4 +324,13 @@ export const BANG_TU_HOA = {
     }
 
 };
+// Mapping of Ngu Hanh to their display properties
+export const NGU_HANH_DISPLAY = {
+    [NguHanh.Kim]: { text: "Kim", color: "#E6E6FA" },  // Light purple for Metal
+    [NguHanh.Thuy]: { text: "Thủy", color: "#E6F3FF" }, // Light blue for Water
+    [NguHanh.Moc]: { text: "Mộc", color: "#E6FFE6" },  // Light green for Wood
+    [NguHanh.Hoa]: { text: "Hỏa", color: "#FFE6E6" },  // Light red for Fire
+    [NguHanh.Tho]: { text: "Thổ", color: "#FFE6CC" }   // Light orange for Earth
+};
+
 export { THIEN_CAN, DIA_CHI, NGU_HANH, NAP_AM, CUNG_CHUC };

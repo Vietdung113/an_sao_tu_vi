@@ -16,7 +16,8 @@ function App() {
       now.getMonth() + 1, // getMonth() returns 0-11
       now.getFullYear(),
       7, // GMT+7
-      gender === "nam" // true for nam, false for nu
+      gender === "nam", // true for nam, false for nu
+      now.getFullYear() // namXem defaults to current year
     );
   });
 
@@ -27,14 +28,15 @@ function App() {
       now.getMonth() + 1,
       now.getFullYear(),
       7,
-      gender === "nam"
+      gender === "nam",
+      now.getFullYear()
     );
     setData(newData);
   }, [gender]);
 
   const handleTimeChange = (timeData) => {
-    const { hour, day, month, year, gmt } = timeData;
-    const newData = ansao(hour, day, month, year, gmt, gender === "nam");
+    const { hour, day, month, year, gmt, namXem } = timeData;
+    const newData = ansao(hour, day, month, year, gmt, gender === "nam", namXem);
     setData(newData);
   };
 
