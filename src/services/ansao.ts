@@ -39,7 +39,7 @@ export function ansao(hour, day, month, year, timeZone, isMale, namXemHan = new 
   // an Dai Van
   const daiVan = tinhDaiVan(lunarDate, namXemHan)
 
-  var canTieuVan = tinhCanTieuVan(namXemHan)
+  const canTieuVan = tinhCanTieuVan(namXemHan)
 
   // This is a sample implementation - replace with actual logic
   return {
