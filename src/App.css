@@ -12,6 +12,27 @@
   margin-bottom: 20px;
 }
 
+.gender-selector {
+  display: flex;
+  gap: 20px;
+  padding-right: 20px;
+  border-right: 1px solid #ddd;
+}
+
+.gender-selector label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+.gender-selector input[type="radio"] {
+  margin: 0;
+  cursor: pointer;
+}
+
 .download-button {
   padding: 8px 16px;
   background-color: #4a90e2;

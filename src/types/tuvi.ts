@@ -162,7 +162,14 @@ export enum ViTriCung {
     HuynhDe = 11
 }
 
-export enum ChinhTinhEnum {
+export enum StarType {
+    ChinhTinh = "ChinhTinh",
+    CatTinh = "CatTinh",
+    TrungTinh = "TrungTinh"
+}
+
+export enum StarEnum {
+    // Chính tinh
     Tuvi = 0,
     ThienCo = 1,
     ThaiDuong = 2,
@@ -177,53 +184,76 @@ export enum ChinhTinhEnum {
     ThienLuong = 11,
     ThatSat = 12,
     PhaQuan = 13,
+    // Cát tinh
+    VanXuong = 14,
+    VanKhuc = 15,
+    TaPhu = 16,
+    HuuBat = 17,
+    ThienKhoi = 18,
+    ThienViet = 19,
+    LongTri = 20,
+    PhuongCac = 21,
+    TamThai = 22,
+    BatToa = 23,
+    // Sát tinh
+    HoaTinh = 24,
+    LinhTinh = 25,
+    DiaKhong = 26,
+    DiaKiep = 27,
+    KinhDuong = 28,
+    DaLa = 29,
+    ThienKhoc = 30,
+    ThienHu = 31,
+    // Vòng Thái Tuế
+    ThaiTue = 32,
+    ThieuDuong = 33,
+    TangMon = 34,
+    ThieuAm = 35,
+    ThaiTueQuanPhu = 36,
+    TuPhu = 37,
+    TuePha = 38,
+    LongDuc = 39,
+    BachHo = 40,
+    PhucDuc = 41,
+    DieuKhach = 42,
+    TrucPhu = 43,
+    // Vòng Lộc Tồn
+    LocTon = 44,
+    LucSy = 45,
+    ThanhLong = 46,
+    TieuHao = 47,
+    TuongQuan = 48,
+    TauThu = 49,
+    PhiLiem = 50,
+    HyThan = 51,
+    BenhPhu = 52,
+    DaiHao = 53,
+    PhucBinh = 54,
+    LocTonQuanPhu = 55,
+    // Vòng Trường Sinh
+    TruongSinh = 56,
+    MocDuc = 57,
+    QuanDoi = 58,
+    LamQuan = 59,
+    DeVuong = 60,
+    Suy = 61,
+    Benh = 62,
+    Tu = 63,
+    Mo = 64,
+    Tuyet = 65,
+    Thai = 66,
+    Duong = 67,
+
+    // Tứ Hoá
+    HoaKy = 68,
+    HoaQuyen = 69,
+    HoaKhoa = 70,
+    HoaLoc = 71,
 }
 
-export interface ChinhTinh {
-    name: number,
+export interface Star {
+    name: StarEnum;
     nguHanh: number;
 }
 
-export interface VongThaiTue {
-    name: number;
-    nguHanh: number;
-}
 
-export interface VongLocTon {
-    name: number;
-    nguHanh: number;
-}
-
-export enum SatTinhEnum {
-    HoaTinh = 0,
-    LinhTinh = 1,
-    DiaKhong = 2,
-    DiaKiep = 3,
-    KinhDuong = 4,
-    DaLa = 5,
-    ThienKhoc = 6,
-    ThienHu = 7,
-}
-export interface SatTinh {
-    name: number,
-    nguHanh: number;
-}
-
-
-export enum CatTinhEnum {
-    VanXuong = 0,
-    VanKhuc = 1,
-    TaPhu = 2,
-    HuuBat = 3,
-    ThienKhoi = 4,
-    ThienViet = 5,
-    LongTri = 6,
-    PhuongCac = 7,
-    TamThai = 8,
-    BatToa = 9,
-}
-
-export interface CatTinh {
-    name: number,
-    nguHanh: number;
-}

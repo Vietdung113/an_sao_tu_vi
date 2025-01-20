@@ -1,4 +1,4 @@
-import { NguHanh } from "../types/tuvi.ts";
+import { StarEnum, NguHanh, ThienCan } from "../types/tuvi.ts";
 
 const THIEN_CAN = ["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"];
 
@@ -157,22 +157,87 @@ const NAP_AM = [
 ];
 
 
-export const CHINH_TINH = [
-    "Tử Vi",
-    "Thiên Cơ",
-    "Thái Dương",
-    "Vũ Khúc",
-    "Thiên Đồng",
-    "Liêm Trinh",
-    "Thiên Phủ",
-    "Thái Âm",
-    "Tham Lang",
-    "Cư Môn",
-    "Thiên Tướng",
-    "Thiên Lương",
-    "Thất Sát",
-    "Phá Quân",
-]
+export const STARS = {
+    // Chính tinh
+    [StarEnum.Tuvi]: "Tử Vi",
+    [StarEnum.ThienCo]: "Thiên Cơ",
+    [StarEnum.ThaiDuong]: "Thái Dương",
+    [StarEnum.VuKhuc]: "Vũ Khúc",
+    [StarEnum.ThienDong]: "Thiên Đồng",
+    [StarEnum.LiemTrinh]: "Liêm Trinh",
+    [StarEnum.ThienPhu]: "Thiên Phủ",
+    [StarEnum.ThaiAm]: "Thái Âm",
+    [StarEnum.ThamLang]: "Tham Lang",
+    [StarEnum.CuMon]: "Cư Môn",
+    [StarEnum.ThienTuong]: "Thiên Tướng",
+    [StarEnum.ThienLuong]: "Thiên Lương",
+    [StarEnum.ThatSat]: "Thất Sát",
+    [StarEnum.PhaQuan]: "Phá Quân",
+    // Cát tinh
+    [StarEnum.VanXuong]: "Văn Xương",
+    [StarEnum.VanKhuc]: "Văn Khúc",
+    [StarEnum.TaPhu]: "Tả Phù",
+    [StarEnum.HuuBat]: "Hữu Bật",
+    [StarEnum.ThienKhoi]: "Thiên Khôi",
+    [StarEnum.ThienViet]: "Thiên Việt",
+    [StarEnum.LongTri]: "Long Trì",
+    [StarEnum.PhuongCac]: "Phượng Các",
+    [StarEnum.TamThai]: "Tam Thai",
+    [StarEnum.BatToa]: "Bát Tọa",
+    // Sát tinh
+    [StarEnum.HoaTinh]: "Hỏa Tinh",
+    [StarEnum.LinhTinh]: "Linh Tinh",
+    [StarEnum.DiaKhong]: "Địa Không",
+    [StarEnum.DiaKiep]: "Địa Kiếp",
+    [StarEnum.KinhDuong]: "Kình Dương",
+    [StarEnum.DaLa]: "Đà La",
+    [StarEnum.ThienKhoc]: "Thiên Khốc",
+    [StarEnum.ThienHu]: "Thiên Hư",
+    // Vòng Thái Tuế
+    [StarEnum.ThaiTue]: "Thái Tuế",
+    [StarEnum.ThieuDuong]: "Thiếu Dương",
+    [StarEnum.TangMon]: "Tang Môn",
+    [StarEnum.ThieuAm]: "Thiếu Âm",
+    [StarEnum.ThaiTueQuanPhu]: "Quan Phù",
+    [StarEnum.TuPhu]: "Tử Phù",
+    [StarEnum.TuePha]: "Tuế Phá",
+    [StarEnum.LongDuc]: "Long Đức",
+    [StarEnum.BachHo]: "Bạch Hổ",
+    [StarEnum.PhucDuc]: "Phúc Đức",
+    [StarEnum.DieuKhach]: "Điếu Khách",
+    [StarEnum.TrucPhu]: "Trực Phù",
+    // Vòng Lộc Tồn
+    [StarEnum.LocTon]: "Lộc Tồn",
+    [StarEnum.LucSy]: "Lực Sỹ",
+    [StarEnum.ThanhLong]: "Thanh Long",
+    [StarEnum.TieuHao]: "Tiểu Hao",
+    [StarEnum.TuongQuan]: "Tướng Quân",
+    [StarEnum.TauThu]: "Tấu Thư",
+    [StarEnum.PhiLiem]: "Phi Liêm",
+    [StarEnum.HyThan]: "Hỷ Thần",
+    [StarEnum.BenhPhu]: "Bệnh Phù",
+    [StarEnum.DaiHao]: "Đại Hao",
+    [StarEnum.PhucBinh]: "Phục Binh",
+    [StarEnum.LocTonQuanPhu]: "Quan Phủ",
+    // Vòng Trường Sinh
+    [StarEnum.TruongSinh]: "Trường Sinh",
+    [StarEnum.MocDuc]: "Mộc Dục",
+    [StarEnum.QuanDoi]: "Quan Đới",
+    [StarEnum.LamQuan]: "Lâm Quan",
+    [StarEnum.DeVuong]: "Đế Vượng",
+    [StarEnum.Suy]: "Suy",
+    [StarEnum.Benh]: "Bệnh",
+    [StarEnum.Tu]: "Tử",
+    [StarEnum.Mo]: "Mộ",
+    [StarEnum.Tuyet]: "Tuyệt",
+    [StarEnum.Thai]: "Thai",
+    [StarEnum.Duong]: "Dưỡng",
+    // Tứ Hoá
+    [StarEnum.HoaLoc]: "Hoa Lộc",
+    [StarEnum.HoaQuyen]: "Hoa Quyền",
+    [StarEnum.HoaKhoa]: "Hoa Khoa",
+    [StarEnum.HoaKy]: "Hoa Kỵ"
+};
 
 export const TIET_KHI = [
     "Xuân Phân", "Thanh Minh", "Cốc Vũ",
@@ -180,37 +245,6 @@ export const TIET_KHI = [
     "Lập Thu", "Xử Thử", "Bạch Lộ", "Thu Phân", "Hàn Lộ", "Sương Giáng",
     "Lập Đông", "Tiểu Tuyết", "Đại Tuyết", "Đông Chí", "Tiểu Hàn", "Đại Hàn",
     "Lập Xuân", "Vũ Thủy", "Kinh Trập"]
-
-
-export const VONG_THAI_TUE = [
-    "Thái Tuế",
-    "Thiếu Dương",
-    "Tang Môn",
-    "Thiếu Âm",
-    "Quan Phù",
-    "Tử Phù",
-    "Tuế Phá", 
-    "Long Đức",
-    "Bạch Hổ",
-    "Phúc Đức",
-    "Điếu Khách", 
-    "Trực Phù"
-]
-
-export const VONG_LOC_TON = [
-    "Lộc Tồn",
-    "Lực Sỹ",
-    "Thanh Long",
-    "Tiểu Hao",
-    "Tướng Quân",
-    "Tấu Thư", 
-    "Phi Liêm",
-    "Hỷ Thần",
-    "Bệnh Phù",
-    "Đại Hao",
-    "Phục Binh",
-    "Quan Phù"
-]
 
 export const VONG_TRANG_SINH = [
     "Trường Sinh",
@@ -221,33 +255,73 @@ export const VONG_TRANG_SINH = [
     "Suy",
     "Bệnh",
     "Tử",
-    "Mộ", 
+    "Mộ",
     "Tuyệt",
     "Thai",
     "Dưỡng"
 ]
 
-export const CAT_TINH = [
-    "Văn Xương",
-    "Văn Khúc",
-    "Tả Phù",
-    "Hữu Bật",
-    "Thiên Khôi", 
-    "Thiên Việt",
-    "Long Trì",
-    "Phượng Các",
-    "Tam Thai", 
-    "Bát Toạ"
-]
+export const BANG_TU_HOA = {
+    [ThienCan.Giap]: {
+        [StarEnum.LiemTrinh]: StarEnum.HoaLoc,
+        [StarEnum.PhaQuan]: StarEnum.HoaQuyen,
+        [StarEnum.VuKhuc]: StarEnum.HoaKhoa,
+        [StarEnum.ThaiDuong]: StarEnum.HoaKy,
+    },
+    [ThienCan.At]: {
+        [StarEnum.ThienCo]: StarEnum.HoaLoc,
+        [StarEnum.ThienLuong]: StarEnum.HoaQuyen,
+        [StarEnum.Tuvi]: StarEnum.HoaKhoa,
+        [StarEnum.ThaiAm]: StarEnum.HoaKy,
+    },
+    [ThienCan.Binh]: {
+        [StarEnum.ThienDong]: StarEnum.HoaLoc,
+        [StarEnum.ThienCo]: StarEnum.HoaQuyen,
+        [StarEnum.VanXuong]: StarEnum.HoaKhoa,
+        [StarEnum.LiemTrinh]: StarEnum.HoaKy,
+    },
+    [ThienCan.Dinh]: {
+        [StarEnum.ThaiAm]: StarEnum.HoaLoc,
+        [StarEnum.ThienDong]: StarEnum.HoaQuyen,
+        [StarEnum.ThienCo]: StarEnum.HoaKhoa,
+        [StarEnum.CuMon]: StarEnum.HoaKy,
+    },
+    [ThienCan.Mau]: {
+        [StarEnum.ThamLang]: StarEnum.HoaLoc,
+        [StarEnum.ThaiAm]: StarEnum.HoaQuyen,
+        [StarEnum.HuuBat]: StarEnum.HoaKhoa,
+        [StarEnum.ThienCo]: StarEnum.HoaKy,
+    },
+    [ThienCan.Ky]: {
+        [StarEnum.VuKhuc]: StarEnum.HoaLoc,
+        [StarEnum.ThamLang]: StarEnum.HoaQuyen,
+        [StarEnum.ThienLuong]: StarEnum.HoaKhoa,
+        [StarEnum.VanKhuc]: StarEnum.HoaKy,
+    },
+    [ThienCan.Canh]: {
+        [StarEnum.ThaiDuong]: StarEnum.HoaLoc,
+        [StarEnum.VuKhuc]: StarEnum.HoaQuyen,
+        [StarEnum.ThaiAm]: StarEnum.HoaKhoa,
+        [StarEnum.ThienDong]: StarEnum.HoaKy,
+    },
+    [ThienCan.Tan]: {
+        [StarEnum.CuMon]: StarEnum.HoaLoc,
+        [StarEnum.ThaiDuong]: StarEnum.HoaQuyen,
+        [StarEnum.VanKhuc]: StarEnum.HoaKhoa,
+        [StarEnum.VanXuong]: StarEnum.HoaKy,
+    },
+    [ThienCan.Nham]: {
+        [StarEnum.ThienLuong]: StarEnum.HoaLoc,
+        [StarEnum.Tuvi]: StarEnum.HoaQuyen,
+        [StarEnum.ThienPhu]: StarEnum.HoaKhoa,
+        [StarEnum.VuKhuc]: StarEnum.HoaKy,
+    },
+    [ThienCan.Quy]: {
+        [StarEnum.PhaQuan]: StarEnum.HoaLoc,
+        [StarEnum.CuMon]: StarEnum.HoaQuyen,
+        [StarEnum.ThaiAm]: StarEnum.HoaKhoa,
+        [StarEnum.ThamLang]: StarEnum.HoaKy,
+    }
 
-export const SAT_TINH = [
-    "Hoả Tinh", 
-    "Linh Tinh",
-    "Địa Không",
-    "Địa Kiếp",
-    "Kình Dương",
-    "Đà La",
-    "Thiên Khốc",
-    "Thiên Hư"
-]
+};
 export { THIEN_CAN, DIA_CHI, NGU_HANH, NAP_AM, CUNG_CHUC };

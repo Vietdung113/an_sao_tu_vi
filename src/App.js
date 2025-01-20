@@ -2,25 +2,39 @@ import "./App.css";
 import { Cung } from "./components/Cung.tsx";
 import TimeSelector from "./components/TimeSelector.tsx";
 import { ansao } from "./services/ansao.ts";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import html2canvas from 'html2canvas';
 import { DiaChi } from "./types/tuvi.ts";
 
 function App() {
   const now = new Date();
+  const [gender, setGender] = useState("nam"); // nam/nu for gender
   const [data, setData] = useState(() => {
     return ansao(
       now.getHours(),
       now.getDate(),
       now.getMonth() + 1, // getMonth() returns 0-11
       now.getFullYear(),
-      7 // GMT+7
+      7, // GMT+7
+      gender === "nam" // true for nam, false for nu
     );
   });
 
+  useEffect(() => {
+    const newData = ansao(
+      now.getHours(),
+      now.getDate(),
+      now.getMonth() + 1,
+      now.getFullYear(),
+      7,
+      gender === "nam"
+    );
+    setData(newData);
+  }, [gender]);
+
   const handleTimeChange = (timeData) => {
     const { hour, day, month, year, gmt } = timeData;
-    const newData = ansao(hour, day, month, year, gmt);
+    const newData = ansao(hour, day, month, year, gmt, gender === "nam");
     setData(newData);
   };
 
@@ -42,6 +56,28 @@ function App() {
     <div className="app-wrapper">
       <div className="controls">
         <TimeSelector onChange={handleTimeChange} />
+        <div className="gender-selector">
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="nam"
+              checked={gender === "nam"}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            Nam
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="nu"
+              checked={gender === "nu"}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            Nữ
+          </label>
+        </div>
         <button 
           onClick={handleDownload}
           className="download-button"
