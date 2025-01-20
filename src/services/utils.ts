@@ -330,7 +330,7 @@ export function anCatTinh(tuTru: TuTru, lunarDate: LunarDate) {
     viTriCatTinh[viTriHuuBat].push({ name: StarEnum.HuuBat, nguHanh: NguHanh.Thuy });
 
     // an xuong khuc
-    viTriCatTinh[(10 - tuTru.chiGio) % 12].push({ name: StarEnum.VanXuong, nguHanh: NguHanh.Kim });
+    viTriCatTinh[(10 - tuTru.chiGio + 12) % 12].push({ name: StarEnum.VanXuong, nguHanh: NguHanh.Kim });
     viTriCatTinh[(4 + tuTru.chiGio) % 12].push({ name: StarEnum.VanKhuc, nguHanh: NguHanh.Thuy });
 
     // an Khoi Viet
