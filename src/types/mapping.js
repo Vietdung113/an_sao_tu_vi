@@ -337,5 +337,6 @@ export const MAU_NGU_HANH = {
     2: "red",
     3: "green",
     4: "gray",
-    5: "orange"
+    5: "orange", 
+    0: "black"
 }

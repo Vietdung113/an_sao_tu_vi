@@ -236,7 +236,22 @@ export const STARS = {
     [StarEnum.HoaLoc]: "Hoa Lộc",
     [StarEnum.HoaQuyen]: "Hoa Quyền",
     [StarEnum.HoaKhoa]: "Hoa Khoa",
-    [StarEnum.HoaKy]: "Hoa Kỵ"
+    [StarEnum.HoaKy]: "Hoa Kỵ",
+
+    // Vòng Tướng Tinh
+    [StarEnum.TuongTinh]: "Tướng Tinh",
+    [StarEnum.PhanAn]: "Phan An",
+    [StarEnum.TueDich]: "Tuế Dịch",
+    [StarEnum.TucThan]: "Tức Thần",
+    [StarEnum.HoaCai]: "Hoa Cái",
+    [StarEnum.KiepSat]: "Kiếp Sát",
+    [StarEnum.TaiSat]: "Tai Sát",
+    [StarEnum.ThienSat]: "Thiên Sát",
+    [StarEnum.ChiBoi]: "Chí Bối",
+    [StarEnum.HamTri]: "Hàm Trì",
+    [StarEnum.NguyetSat]: "Nguyệt Sát",
+    [StarEnum.VongThan]: "Vong Thần",
+
 };
 
 export const TIET_KHI = [

@@ -1,6 +1,7 @@
 // import { CUNG_CHUC, DIA_CHI, THIEN_CAN, VONG_TRANG_SINH } from './constain.ts';
-import { AmDuongNamNu, StarEnum, Cuc, DiaChi, LunarDate, NguHanh, ThienCan, Star} from '../types/tuvi.ts';
+import { AmDuongNamNu, StarEnum, Cuc, DiaChi, LunarDate, NguHanh, ThienCan, Star } from '../types/tuvi.ts';
 import { TuTru } from '../types/tuvi.ts';
+import { BANG_TU_HOA, STARS, THIEN_CAN } from './constain.ts';
 
 
 export function getAmDuongNamNu(isMale: boolean, canNam: number): number {
@@ -380,8 +381,84 @@ export function tinhDaiVan(lunarDate: LunarDate, namXemHan: number) {
 export function tinhCanTieuVan(namXemHan) {
     var canCacThang = new Array(12);
     var months = [11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    for (let i=0; i < months.length; i++) {
+    for (let i = 0; i < months.length; i++) {
         canCacThang[i] = (namXemHan * 12 + months[i] + 3) % 10;
     }
     return canCacThang;
+}
+
+export function anVongTuongTinh(chiNam: number) {
+    var viTriTuongTinh;
+    if ([DiaChi.Than, DiaChi.Ty, DiaChi.Thin].includes(chiNam)) {
+        viTriTuongTinh = DiaChi.Ty;
+    }
+    if ([DiaChi.Dau, DiaChi.Suu, DiaChi.Ti].includes(chiNam)) {
+        viTriTuongTinh = DiaChi.Dau;
+    }
+    if ([DiaChi.Dan, DiaChi.Ngo, DiaChi.Tuat].includes(chiNam)) {
+        viTriTuongTinh = DiaChi.Ngo;
+    }
+    if ([DiaChi.Hoi, DiaChi.Mui, DiaChi.Mao].includes(chiNam)) {
+        viTriTuongTinh = DiaChi.Mao;
+    }
+    let viTriVongTuongTinh: Star[] = new Array(12);
+    viTriVongTuongTinh[(viTriTuongTinh + 0) % 12] = { name: StarEnum.TuongTinh, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 1) % 12] = { name: StarEnum.PhanAn, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 2) % 12] = { name: StarEnum.TueDich, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 3) % 12] = { name: StarEnum.TucThan, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 4) % 12] = { name: StarEnum.HoaCai, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 5) % 12] = { name: StarEnum.KiepSat, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 6) % 12] = { name: StarEnum.TaiSat, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 7) % 12] = { name: StarEnum.ThienSat, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 8) % 12] = { name: StarEnum.ChiBoi, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 9) % 12] = { name: StarEnum.HamTri, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 10) % 12] = { name: StarEnum.NguyetSat, nguHanh: NguHanh.Khong };
+    viTriVongTuongTinh[(viTriTuongTinh + 11) % 12] = { name: StarEnum.VongThan, nguHanh: NguHanh.Khong };
+    return viTriVongTuongTinh;
+}
+
+
+function getChinhTinhLocation(chinhTinh: Star[][], lucCat: Star[][], star: Number) {
+    for (let i = 0; i < 12; i++) {
+        for (let j = 0; j < chinhTinh[i].length; j++) {
+            if (chinhTinh[i][j].name === star) {
+                return i;
+            }
+        }
+    }
+    for (let i = 0; i < 12; i++) {
+        for (let j = 0; j < lucCat[i].length; j++) {
+            if (lucCat[i][j].name === star) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+function getTuHoaNguHanh(hoa: number): number {
+    if (hoa === StarEnum.HoaKy) return NguHanh.Thuy;
+    if (hoa === StarEnum.HoaQuyen) return NguHanh.Hoa;
+    if (hoa === StarEnum.HoaLoc) return NguHanh.Kim;
+    if (hoa === StarEnum.HoaKhoa) return NguHanh.Moc;
+    return NguHanh.Khong;
+}
+
+export function anPhiHoa(year: number, chinhTinh: Star[][], lucCat: Star[][]) {
+    var phiHoaCacCung: { hoa: any, phiHoaToiCung: number, saoHoa: any, nguHanh: number }[][] = Array.from({ length: 12 }, () => []);
+    var canCacThang = anCanCung(year);
+
+    for (let i = 0; i < 12; i++) {
+        var canCung = canCacThang[i];
+        var tuHoaCanCung = BANG_TU_HOA[canCung];
+        console.log(THIEN_CAN[canCung]);
+        for(const ct in tuHoaCanCung) {
+            var viTriChinhTinhTrenDiaBan = getChinhTinhLocation(chinhTinh, lucCat, Number(ct));
+            var nguHanhTuHoa = getTuHoaNguHanh(tuHoaCanCung[ct]);
+            phiHoaCacCung[i].push({ hoa: tuHoaCanCung[ct], phiHoaToiCung: viTriChinhTinhTrenDiaBan, saoHoa: Number(ct), nguHanh: nguHanhTuHoa });
+        }
+        phiHoaCacCung[i].sort((a, b) => b.hoa - a.hoa);
+    }   
+
+    return phiHoaCacCung;
 }

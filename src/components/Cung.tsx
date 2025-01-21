@@ -23,12 +23,12 @@ const styles = {
     alignItems: "flex-start"
   },
   napAm: {
-    fontSize: "80%"
+    fontSize: "50%"
   },
   cungChuc: {
     position: "absolute" as const,
     top: "5%",
-    left: "75%",
+    left: "50%",
     transform: "translateX(-50%)",
     fontSize: "100%",
     color: "black",
@@ -36,36 +36,44 @@ const styles = {
   },
   chinhTinh: {
     position: "absolute" as const,
-    top: "25%",
-    left: "75%",
+    top: "20%",
+    left: "50%",
     transform: "translateX(-50%)",
     display: "flex",
     flexDirection: "column" as const,
     alignItems: "center",
+    fontSize: "140%",
     gap: "2px"
   },
   trangSinh: {
     position: "absolute" as const,
     bottom: "5%",
-    left: "75%",
+    left: "50%",
     transform: "translateX(-50%)",
     display: "flex",
-    fontSize: "90%",
+    fontSize: "70%",
     flexDirection: "column" as const,
     alignItems: "center",
     gap: "2px"
   },
   rightStars: {
     position: "absolute" as const,
+    top: "40%",
+    right: "0%",
+    fontSize: "75%",
+    padding: "4px"
+  },
+  middleStars: {
+    position: "absolute" as const,
     bottom: "15%",
-    right: "4px",
+    right: "50%",
     fontSize: "75%",
     padding: "4px"
   },
   leftStars: {
     position: "absolute" as const,
     top: "60%",
-    left: "40%",
+    right: "80%",
     fontSize: "75%",
     padding: "4px"
   },
@@ -84,8 +92,9 @@ function getNguHanhStyle(ngu_hanh: number): React.CSSProperties {
   };
 }
 
-function getTuHoaStars(tuTru: TuTru, chinhTinh: Star[], lucCat: Star[]): { leftStars: Star[], rightStars: Star[] } {
+function getTuHoaStars(tuTru: TuTru, chinhTinh: Star[], lucCat: Star[]): { leftStars: Star[], middleStars: Star[], rightStars: Star[] } {
   const leftStars: Star[] = [];
+  const middleStars: Star[] = [];
   const rightStars: Star[] = [];
   const saoHoa = chinhTinh.concat(lucCat);
 
@@ -93,7 +102,7 @@ function getTuHoaStars(tuTru: TuTru, chinhTinh: Star[], lucCat: Star[]): { leftS
     const hoa = BANG_TU_HOA[tuTru.canNam][sao.name];
     switch (hoa) {
       case StarEnum.HoaKy:
-        rightStars.push({ name: STARS[StarEnum.HoaKy], nguHanh: NguHanh.Thuy });
+        middleStars.push({ name: STARS[StarEnum.HoaKy], nguHanh: NguHanh.Thuy });
         break;
       case StarEnum.HoaKhoa:
         leftStars.push({ name: STARS[StarEnum.HoaKhoa], nguHanh: NguHanh.Moc });
@@ -107,14 +116,15 @@ function getTuHoaStars(tuTru: TuTru, chinhTinh: Star[], lucCat: Star[]): { leftS
     }
   });
 
-  return { leftStars, rightStars };
+  return { leftStars, middleStars, rightStars };
 }
 
-function getAdditionalStars(vongThaiTue: Star, vongLocTon: Star, lucSat: Star[], lucCat: Star[]): { leftStars: Star[], rightStars: Star[] } {
+function getAdditionalStars(vongThaiTue: Star, vongLocTon: Star, vongTuongtinh: Star, lucSat: Star[], lucCat: Star[]): { leftStars: Star[], middleStars: Star[], rightStars: Star[] } {
   const leftStars: Star[] = [];
+  const middleStars: Star[] = [];
   const rightStars: Star[] = [];
 
-  // Add right stars
+  // cac vong
   rightStars.push({
     name: STARS[vongThaiTue.name],
     nguHanh: vongThaiTue.nguHanh
@@ -123,14 +133,19 @@ function getAdditionalStars(vongThaiTue: Star, vongLocTon: Star, lucSat: Star[],
     name: STARS[vongLocTon.name],
     nguHanh: vongLocTon.nguHanh
   });
+  rightStars.push({
+    name: STARS[vongTuongtinh.name],
+    nguHanh: vongTuongtinh.nguHanh
+  });
+  // sat tinh
   lucSat.forEach(sat => {
-    rightStars.push({
+    middleStars.push({
       name: STARS[sat.name],
       nguHanh: sat.nguHanh
     });
   });
 
-  // Add left stars
+  // cat tinh
   lucCat.forEach(cat => {
     leftStars.push({
       name: STARS[cat.name],
@@ -138,8 +153,22 @@ function getAdditionalStars(vongThaiTue: Star, vongLocTon: Star, lucSat: Star[],
     });
   });
 
-  return { leftStars, rightStars };
+  return { leftStars, middleStars, rightStars };
 }
+
+
+function getPhiHoa(phiHoa: any): Star[] {
+  var res: Star[] = [];
+  for (let i= 0 ; i< 4; i++) {
+    var s = `${STARS[phiHoa[i]["hoa"]]} ---> ${DIA_CHI[phiHoa[i]["phiHoaToiCung"]]}`;
+    res.push({
+      name: s,
+      nguHanh: phiHoa[i]["nguHanh"]
+    })
+  }
+  return res;
+}
+
 
 function getNguHanhColor(ngu_hanh: number): string {
   return MAU_NGU_HANH[ngu_hanh];
@@ -178,6 +207,8 @@ function extractCungData(data: any, name: string) {
   const ngu_hanh_nap_am = NAP_AM[canCung[name]][name];
   const daiVan = data["daivan"];
   const canTieuVan = data["canTieuVan"][name];
+  const vongTuongtinh = data["vongTuongTinh"][name];
+  const phiHoa = data["phiHoa"][name];
 
   if (ngu_hanh_nap_am === null) {
     throw new Error("Ngu hanh nap am is null");
@@ -185,8 +216,10 @@ function extractCungData(data: any, name: string) {
 
   const canDaiVan = (canCung[name] + 2 * daiVan) % 10;
   const ngu_hanh_nap_am_dai_van = NAP_AM[canDaiVan][name];
-  
   const ngu_hanh_nap_am_tieu_van = NAP_AM[canTieuVan][name];
+
+
+  
 
   return {
     tuTru,
@@ -200,7 +233,9 @@ function extractCungData(data: any, name: string) {
     lucCat,
     ngu_hanh_nap_am,
     ngu_hanh_nap_am_dai_van,
-    ngu_hanh_nap_am_tieu_van
+    ngu_hanh_nap_am_tieu_van,
+    vongTuongtinh,
+    phiHoa
   };
 }
 
@@ -217,14 +252,18 @@ export function Cung({ data, name }) {
     lucCat,
     ngu_hanh_nap_am,
     ngu_hanh_nap_am_dai_van,
-    ngu_hanh_nap_am_tieu_van
+    ngu_hanh_nap_am_tieu_van,
+    vongTuongtinh,
+    phiHoa
   } = extractCungData(data, name);
 
   const tuHoaStars = getTuHoaStars(tuTru, chinhTinh, lucCat);
-  const additionalStars = getAdditionalStars(vongThaiTue, vongLocTon, lucSat, lucCat);
+  const additionalStars = getAdditionalStars(vongThaiTue, vongLocTon, vongTuongtinh, lucSat, lucCat);
+  const phiHoaStars = getPhiHoa(phiHoa);
 
   const leftStars = [...tuHoaStars.leftStars, ...additionalStars.leftStars];
-  const rightStars = [...tuHoaStars.rightStars, ...additionalStars.rightStars];
+  const middleStars = [...tuHoaStars.middleStars, ...additionalStars.middleStars];
+  const rightStars = [...tuHoaStars.rightStars, ...additionalStars.rightStars, ...phiHoaStars];
 
   return (
     <div className={name} style={styles.container}>
@@ -281,6 +320,7 @@ export function Cung({ data, name }) {
       </div>
 
       <StarList stars={rightStars} style={styles.rightStars} />
+      <StarList stars={middleStars} style={styles.middleStars} />
       <StarList stars={leftStars} style={styles.leftStars} />
     </div>
   );

@@ -2,7 +2,7 @@ import "./App.css";
 import { Cung } from "./components/Cung.tsx";
 import TimeSelector from "./components/TimeSelector.tsx";
 import { ansao } from "./services/ansao.ts";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import html2canvas from 'html2canvas';
 import { DiaChi } from "./types/tuvi.ts";
 
@@ -21,25 +21,38 @@ function App() {
     );
   });
 
-  useEffect(() => {
+  const [selectedTime, setSelectedTime] = useState({
+    hour: now.getHours(),
+    day: now.getDate(),
+    month: now.getMonth() + 1,
+    year: now.getFullYear(),
+    gmt: 7,
+    namXem: now.getFullYear()
+  });
+
+  const handleGenderChange = (e) => {
+    const newGender = e.target.value;
+    setGender(newGender);
     const newData = ansao(
-      now.getHours(),
-      now.getDate(),
-      now.getMonth() + 1,
-      now.getFullYear(),
-      7,
-      gender === "nam",
-      now.getFullYear()
+      selectedTime.hour,
+      selectedTime.day,
+      selectedTime.month,
+      selectedTime.year,
+      selectedTime.gmt,
+      newGender === "nam",
+      selectedTime.namXem
     );
     setData(newData);
-  }, [gender]);
+  };
 
   const handleTimeChange = (timeData) => {
+    setSelectedTime(timeData);
     const { hour, day, month, year, gmt, namXem } = timeData;
     const newData = ansao(hour, day, month, year, gmt, gender === "nam", namXem);
     setData(newData);
   };
 
+  
   const containerRef = useRef(null);
 
   const handleDownload = () => {
@@ -65,7 +78,7 @@ function App() {
               name="gender"
               value="nam"
               checked={gender === "nam"}
-              onChange={(e) => setGender(e.target.value)}
+              onChange={handleGenderChange}
             />
             Nam
           </label>
@@ -75,7 +88,7 @@ function App() {
               name="gender"
               value="nu"
               checked={gender === "nu"}
-              onChange={(e) => setGender(e.target.value)}
+              onChange={handleGenderChange}
             />
             Nữ
           </label>

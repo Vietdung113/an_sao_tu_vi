@@ -37,7 +37,8 @@ export enum NguHanh {
     Thuy = 1,
     Moc = 3,
     Hoa = 2,
-    Tho = 5
+    Tho = 5,
+    Khong = 0
 }
 
 // Thiên Can type
@@ -249,6 +250,21 @@ export enum StarEnum {
     HoaQuyen = 69,
     HoaKhoa = 70,
     HoaLoc = 71,
+
+    // vong Tuong Tinh
+
+    TuongTinh = 72,
+    PhanAn = 73,
+    TueDich = 74,
+    TucThan = 75,
+    HoaCai = 76,
+    KiepSat = 77,
+    TaiSat = 78,
+    ThienSat = 79,
+    ChiBoi = 80,
+    HamTri = 81,
+    NguyetSat = 82,
+    VongThan = 83,
 }
 
 export interface Star {

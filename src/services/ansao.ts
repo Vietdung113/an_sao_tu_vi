@@ -1,7 +1,7 @@
 import { convertSolar2Lunar, getLunarDateTK } from "./calender.ts";
 import { DIA_CHI, THIEN_CAN } from "./constain.ts";
 // import { DIA_CHI, THIEN_CAN, CUNG_CHUC, STARS, VONG_TRANG_SINH } from "./constain.ts";
-import { anChinhtinh, anCungChuc, anCungMenh, anCungThan, anCatTinh, anSatTinh, anVongLocTon, anVongThaiTue, anVongTrangSinh, getAmDuongNamNu, getChiGio, getTuTru, timCucMenh, anCanCung, tinhDaiVan, tinhCanTieuVan } from "./utils.ts";
+import { anChinhtinh, anCungChuc, anCungMenh, anCungThan, anCatTinh, anSatTinh, anVongLocTon, anVongThaiTue, anVongTrangSinh, getAmDuongNamNu, getChiGio, getTuTru, timCucMenh, anCanCung, tinhDaiVan, tinhCanTieuVan, anVongTuongTinh, anPhiHoa } from "./utils.ts";
 
 // Function to process time data and return formatted data for Cung component
 export function ansao(hour, day, month, year, timeZone, isMale, namXemHan = new Date().getFullYear()) {
@@ -27,8 +27,13 @@ export function ansao(hour, day, month, year, timeZone, isMale, namXemHan = new 
 
   // an loc ton
   const vongLocTon = anVongLocTon(tuTru.canNam);
+
   // An trang sinh
   const vongTrangSinh = anVongTrangSinh(cucMenh, am_duong_nam_nu);
+
+  // an vong tuong tinh
+
+  const vongTuongTinh = anVongTuongTinh(tuTru.chiNam);
 
   // an luc sat tinh
   const lucSat = anSatTinh(tuTru.canNam, tuTru.chiNam, tuTru.chiGio);
@@ -37,9 +42,13 @@ export function ansao(hour, day, month, year, timeZone, isMale, namXemHan = new 
   const lucCat = anCatTinh(tuTru, lunarDate);
 
   // an Dai Van
-  const daiVan = tinhDaiVan(lunarDate, namXemHan)
+  const daiVan = tinhDaiVan(lunarDate, namXemHan);
 
-  const canTieuVan = tinhCanTieuVan(namXemHan)
+  // an Tieu van
+  const canTieuVan = tinhCanTieuVan(namXemHan);
+
+  // An Phi hoa
+  const phiHoa = anPhiHoa(lunarDate.year, chinhTinh, lucCat);
 
   // This is a sample implementation - replace with actual logic
   return {
@@ -55,6 +64,8 @@ export function ansao(hour, day, month, year, timeZone, isMale, namXemHan = new 
     "tuTru": tuTru,
     "lunarDate": lunarDate,
     "daivan": daiVan,
-    "canTieuVan": canTieuVan
+    "canTieuVan": canTieuVan,
+    "vongTuongTinh": vongTuongTinh,
+    "phiHoa": phiHoa
   };
 }
