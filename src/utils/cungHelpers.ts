@@ -78,14 +78,20 @@ export function getAdditionalStars(vongThaiTue: Star, vongLocTon: Star, vongTuon
   return { leftStars, middleStars, rightStars };
 }
 
-export function getPhiHoa(phiHoa: any, cungChuc: []): DisplayStar[] {
+export function getPhiHoa(phiHoa: any, cungChuc: [], cungHienTai: number): DisplayStar[] {
   var res: DisplayStar[] = [];
   for (let i = 0; i < 4; i++) {
     var diachi = phiHoa[i]["phiHoaToiCung"];
     var tenHoa = STARS[phiHoa[i]["hoa"]];
-    console.log(tenHoa);
     var hoa = tenHoa.split(" ").pop();
-    var s = `${hoa} -> ${CUNG_CHUC[cungChuc[diachi]]}`;
+    if (diachi == cungHienTai ){
+      var s = `Tự Hoá ${hoa}`
+    }
+    else { 
+      var cungChucName = CUNG_CHUC[cungChuc[diachi]];
+      var firstWord = cungChucName.split(" ")[0]; // Get the first word
+      var s = `${hoa} -> ${firstWord}`;
+    }
     res.push({
       name: s,
       nguHanh: phiHoa[i]["nguHanh"]

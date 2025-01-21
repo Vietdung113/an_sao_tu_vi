@@ -252,7 +252,6 @@ export enum StarEnum {
     HoaLoc = 71,
 
     // vong Tuong Tinh
-
     TuongTinh = 72,
     PhanAn = 73,
     TueDich = 74,

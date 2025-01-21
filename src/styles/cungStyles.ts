@@ -49,14 +49,14 @@ export const styles = {
   rightStars: {
     position: "absolute" as const,
     top: "35%",
-    right: "0%",
+    right: "5%",
     fontSize: "70%",
     padding: "4px"
   },
   middleStars: {
     position: "absolute" as const,
-    bottom: "15%",
-    right: "50%",
+    top: "45%",
+    right: "45%",
     fontSize: "70%",
     padding: "4px"
   },

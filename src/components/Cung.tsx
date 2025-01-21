@@ -55,7 +55,7 @@ export function Cung({ data, name }: { data: any, name: string }) {
 
   const tuHoaStars = getTuHoaStars(tuTru, chinhTinh, lucCat);
   const additionalStars = getAdditionalStars(vongThaiTue, vongLocTon, vongTuongtinh, lucSat, lucCat);
-  const phiHoaStars = getPhiHoa(phiHoa, data["viTriCung"]);
+  const phiHoaStars = getPhiHoa(phiHoa, data["viTriCung"], Number(name));
 
   const leftStars: DisplayStar[] = [...tuHoaStars.leftStars, ...additionalStars.leftStars];
   const middleStars: DisplayStar[] = [...tuHoaStars.middleStars, ...additionalStars.middleStars];

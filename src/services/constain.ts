@@ -328,7 +328,7 @@ export const BANG_TU_HOA = {
     [ThienCan.Nham]: {
         [StarEnum.ThienLuong]: StarEnum.HoaLoc,
         [StarEnum.Tuvi]: StarEnum.HoaQuyen,
-        [StarEnum.ThienPhu]: StarEnum.HoaKhoa,
+        [StarEnum.TaPhu]: StarEnum.HoaKhoa,
         [StarEnum.VuKhuc]: StarEnum.HoaKy,
     },
     [ThienCan.Quy]: {
