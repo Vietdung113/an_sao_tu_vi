@@ -82,7 +82,7 @@ export function getPhiHoa(phiHoa: any, cungChuc: []): DisplayStar[] {
   var res: DisplayStar[] = [];
   for (let i = 0; i < 4; i++) {
     var diachi = phiHoa[i]["phiHoaToiCung"];
-    var s = `${STARS[phiHoa[i]["hoa"]]} ---> ${CUNG_CHUC[cungChuc[diachi]]}`;
+    var s = `${STARS[phiHoa[i]["hoa"]]} -> ${CUNG_CHUC[cungChuc[diachi]]}`;
     res.push({
       name: s,
       nguHanh: phiHoa[i]["nguHanh"]

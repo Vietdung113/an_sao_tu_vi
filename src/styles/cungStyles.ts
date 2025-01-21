@@ -33,7 +33,7 @@ export const styles = {
     display: "flex",
     flexDirection: "column" as const,
     alignItems: "center",
-    fontSize: "140%"
+    fontSize: "135%"
   },
   trangSinh: {
     position: "absolute" as const,
@@ -48,23 +48,23 @@ export const styles = {
   },
   rightStars: {
     position: "absolute" as const,
-    top: "40%",
+    top: "35%",
     right: "0%",
-    fontSize: "75%",
+    fontSize: "70%",
     padding: "4px"
   },
   middleStars: {
     position: "absolute" as const,
     bottom: "15%",
     right: "50%",
-    fontSize: "75%",
+    fontSize: "70%",
     padding: "4px"
   },
   leftStars: {
     position: "absolute" as const,
     top: "60%",
     right: "80%",
-    fontSize: "75%",
+    fontSize: "70%",
     padding: "4px"
   },
   star: {
