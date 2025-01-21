@@ -10,24 +10,24 @@ function App() {
   const now = new Date();
   const [gender, setGender] = useState("nam"); // nam/nu for gender
   const [data, setData] = useState(() => {
-    return ansao(
-      8,
-      11,
-      3,
-      1996,
-      7,
-      true,
-      now.getFullYear()
-    )
     // return ansao(
-    //   now.getHours(),
-    //   now.getDate(),
-    //   now.getMonth() + 1, // getMonth() returns 0-11
-    //   now.getFullYear(),
-    //   7, // GMT+7
-    //   gender === "nam", // true for nam, false for nu
-    //   now.getFullYear() // namXem defaults to current year
-    // );
+    //   8,
+    //   11,
+    //   3,
+    //   1996,
+    //   7,
+    //   true,
+    //   now.getFullYear()
+    // )
+    return ansao(
+      now.getHours(),
+      now.getDate(),
+      now.getMonth() + 1, // getMonth() returns 0-11
+      now.getFullYear(),
+      7, // GMT+7
+      gender === "nam", // true for nam, false for nu
+      now.getFullYear() // namXem defaults to current year
+    );
   });
 
   const [selectedTime, setSelectedTime] = useState({
