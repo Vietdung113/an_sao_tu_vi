@@ -233,10 +233,10 @@ export const STARS = {
     [StarEnum.Thai]: "Thai",
     [StarEnum.Duong]: "Dưỡng",
     // Tứ Hoá
-    [StarEnum.HoaLoc]: "Hoa Lộc",
-    [StarEnum.HoaQuyen]: "Hoa Quyền",
-    [StarEnum.HoaKhoa]: "Hoa Khoa",
-    [StarEnum.HoaKy]: "Hoa Kỵ",
+    [StarEnum.HoaLoc]: "Hoá Lộc",
+    [StarEnum.HoaQuyen]: "Hoá Quyền",
+    [StarEnum.HoaKhoa]: "Hoá Khoa",
+    [StarEnum.HoaKy]: "Hoá Kỵ",
 
     // Vòng Tướng Tinh
     [StarEnum.TuongTinh]: "Tướng Tinh",
