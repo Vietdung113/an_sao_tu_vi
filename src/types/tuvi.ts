@@ -247,8 +247,8 @@ export enum StarEnum {
 
     // Tứ Hoá
     HoaKy = 68,
-    HoaQuyen = 69,
-    HoaKhoa = 70,
+    HoaQuyen = 70,
+    HoaKhoa = 69,
     HoaLoc = 71,
 
     // vong Tuong Tinh
